@@ -29,7 +29,7 @@ class Book:
         """
 
         filled_resting_orders = list()
-
+        order_of_list = resting_orders
         order_of_list = reversed(resting_orders) if o.side == SideEnum.BUY else resting_orders
 
         for ro in order_of_list:
@@ -37,6 +37,7 @@ class Book:
                 return filled_resting_orders
 
             if (o.px >= ro.px and o.side == SideEnum.BUY) or (o.px <= ro.px and o.side == SideEnum.SELL):
+            #if o.px >= ro.px:
                 q = min(o.qty, ro.qty)
 
                 self._message_publisher.publish(TradeEvent(q, ro.px))
@@ -74,14 +75,3 @@ class Book:
         if o is not None:
             remove_from = self._sells if o.side == SideEnum.SELL else self._buys
             remove_from.remove(o)
-
-    def print_book(self):
-
-        print("\nThe Book")
-        for i in self._sells:
-            print(i)
-
-        print("--------------")
-
-        for i in self._buys:
-            print(i)
