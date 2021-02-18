@@ -30,9 +30,19 @@ class Book:
 
         filled_resting_orders = list()
         # order_of_list = resting_orders
-        order_of_list = reversed(resting_orders) if o.side == SideEnum.BUY else resting_orders
+        # order_of_list = reversed(resting_orders) if o.side == SideEnum.BUY else resting_orders
 
-        for ro in order_of_list:
+        if o.side == SideEnum.SELL:
+            _i0 = 0
+            _if = len(resting_orders) - 1
+            _dir = 1
+        else:
+            _i0 = len(resting_orders) - 1
+            _if = 0
+            _dir = -1
+
+        for i in range(_i0, _if, _dir):
+            ro = resting_orders[i]
             if o.qty <= 0:
                 return filled_resting_orders
 
