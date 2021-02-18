@@ -8,11 +8,43 @@
 
 
 ## Instructions: 
-- git clone https://github.com/boksman/matching-engine.git
-- cd matching-engine
-- chmod u+x *.sh
-- sudo ./test.sh  
-- sudo ./run.sh
+```
+git clone https://github.com/boksman/matching-engine.git
+cd matching-engine
+chmod u+x *.sh
+sudo ./test.sh  
+sudo ./run.sh
+```
+## test.sh output
+```
+Removing intermediate container 3a0894561610
+ ---> df063d9f990c
+Step 6/7 : COPY . .
+ ---> d1a6cf79b99e
+Step 7/7 : CMD [ "python"]
+ ---> Running in 4dd71313907e
+Removing intermediate container 4dd71313907e
+ ---> 27e980c9876a
+Successfully built 27e980c9876a
+Successfully tagged matching-engine:1.0.dev
+Build done
+docker run -t matching-engine:1.0.dev python -m pytest test
+============================================================================ test session starts ============================================================================
+platform linux -- Python 3.7.4, pytest-6.0.1, py-1.10.0, pluggy-0.13.1
+rootdir: /app
+collected 5 items
+
+test/test_engine.py .                                                                                                                                                 [ 20%]
+test/test_main.py .                                                                                                                                                   [ 40%]
+test/test_message_parser.py ...                                                                                                                                       [100%]
+
+============================================================================= 5 passed in 0.05s =============================================================================
+done
+
+```
+
+
+
 
 ## Performance Characteristics by Scenario
 - Determine if AddOrderRequest results in a match
